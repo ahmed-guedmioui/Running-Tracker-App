@@ -12,3 +12,12 @@ dependencies {
     compileOnly(libs.ksp.gradlePlugin)
     compileOnly(libs.room.gradlePlugin)
 }
+
+gradlePlugin {
+    plugins {
+        register("androidApplication") {
+            id = "running_tracker_app.android.application"
+            implementationClass = "AndroidApplicationConventionPlugin"
+        }
+    }
+}
