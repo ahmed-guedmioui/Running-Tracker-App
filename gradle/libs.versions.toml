@@ -123,3 +123,4 @@ mapsplatform-secrets-plugin = { id = "com.google.android.libraries.mapsplatform.
 runningTrackerApp-android-application = { id = "running_tracker_app.android.application", version = "unspecified" }
 runningTrackerApp-android-application-compose = { id = "running_tracker_app.android.application.compose", version = "unspecified" }
 runningTrackerApp-android-library = { id = "running_tracker_app.android.library", version = "unspecified" }
+runningTrackerApp-android-library-compose = { id = "running_tracker_app.android.library.compose", version = "unspecified" }
