@@ -31,6 +31,10 @@ gradlePlugin {
             id = "running_tracker_app.android.library.compose"
             implementationClass = "AndroidLibraryComposeConventionPlugin"
         }
+        register("AndroidFeatureUI") {
+            id = "running_tracker_app.android.feature.ui"
+            implementationClass = "AndroidFeatureUIConventionPlugin"
+        }
     }
 }
 
