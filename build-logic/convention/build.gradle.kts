@@ -35,6 +35,10 @@ gradlePlugin {
             id = "running_tracker_app.android.feature.ui"
             implementationClass = "AndroidFeatureUIConventionPlugin"
         }
+        register("AndroidRoom") {
+            id = "running_tracker_app.android.room"
+            implementationClass = "AndroidRoomConventionPlugin"
+        }
     }
 }
 
