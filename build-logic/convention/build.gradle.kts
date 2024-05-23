@@ -23,6 +23,10 @@ gradlePlugin {
             id = "running_tracker_app.android.application.compose"
             implementationClass = "AndroidApplicationComposeConventionPlugin"
         }
+        register("AndroidLibrary") {
+            id = "running_tracker_app.android.library"
+            implementationClass = "AndroidLibraryConventionPlugin"
+        }
     }
 }
 
