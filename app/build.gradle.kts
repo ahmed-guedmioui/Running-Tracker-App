@@ -1,6 +1,6 @@
 plugins {
+    alias(libs.plugins.runningTrackerApp.android.application.compose)
     alias(libs.plugins.mapsplatform.secrets.plugin)
-    alias(libs.plugins.runningTrackerApp.android.application)
 }
 
 android {
@@ -13,12 +13,6 @@ android {
         }
     }
 
-    buildFeatures {
-        compose = true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.14"
-    }
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"

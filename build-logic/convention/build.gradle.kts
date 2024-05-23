@@ -19,5 +19,19 @@ gradlePlugin {
             id = "running_tracker_app.android.application"
             implementationClass = "AndroidApplicationConventionPlugin"
         }
+        register("androidApplicationCompose") {
+            id = "running_tracker_app.android.application.compose"
+            implementationClass = "AndroidApplicationComposeConventionPlugin"
+        }
     }
 }
+
+
+
+
+
+
+
+
+
+

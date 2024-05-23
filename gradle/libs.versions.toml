@@ -1,11 +1,11 @@
 [versions]
 agp = "8.2.2"
-androidTools = "31.2.2"
+androidTools = "31.4.1"
 core = "1.10.3"
 playCore = "1.10.3"
 coreSplashscreen = "1.0.1"
 coilCompose = "2.6.0"
-composeCompiler = "1.5.9"
+composeCompiler = "1.5.14"
 desugar_jdk_libs = "2.0.4"
 kotlin = "1.9.23"
 coreKtx = "1.13.1"
@@ -121,3 +121,4 @@ androidDynamicFeature = { id = "com.android.dynamic-feature", version.ref = "agp
 mapsplatform-secrets-plugin = { id = "com.google.android.libraries.mapsplatform.secrets-gradle-plugin", version.ref = "secretsPlugin"}
 
 runningTrackerApp-android-application = { id = "running_tracker_app.android.application", version = "unspecified" }
+runningTrackerApp-android-application-compose = { id = "running_tracker_app.android.application.compose", version = "unspecified" }
