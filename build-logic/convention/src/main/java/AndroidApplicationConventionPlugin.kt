@@ -1,3 +1,5 @@
+import com.ahmed_apps.convention.ExtensionType
+import com.ahmed_apps.convention.configureBuildTypes
 import com.ahmed_apps.convention.configureKotlinAndroid
 import com.ahmed_apps.convention.libs
 import com.android.build.api.dsl.ApplicationExtension
@@ -26,6 +28,11 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
                 }
 
                 configureKotlinAndroid(this)
+
+                configureBuildTypes(
+                    commonExtension = this,
+                    extensionType = ExtensionType.APPLICATION
+                )
             }
         }
     }
