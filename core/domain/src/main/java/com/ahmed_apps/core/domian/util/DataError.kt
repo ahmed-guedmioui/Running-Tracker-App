@@ -10,6 +10,7 @@ sealed interface DataError: Error {
         CONFLICT,
         TOO_MANY_REQUESTS,
         NO_INTERNET,
+        PAYLOAD_TOO_LARGE,
         SERVER_ERROR,
         SERIALIZATION_ERROR,
         UNKNOWN
