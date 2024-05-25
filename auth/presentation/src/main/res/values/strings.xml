@@ -5,4 +5,16 @@
     <string name="running_tracker_description">Track your running progress, set your goals and achieve your fitness.</string>
     <string name="sign_up">Sign up</string>
     <string name="sing_in">Sing in</string>
+    <string name="create_account">Create Account</string>
+    <string name="already_have_an_account">Already have an account?</string>
+    <string name="login">Login</string>
+    <string name="example_test_com">example@test.com</string>
+    <string name="email">Email</string>
+    <string name="must_be_a_valid_email">Must be a valid email</string>
+    <string name="password">Password</string>
+    <string name="at_least_x_characters">At least %d characters</string>
+    <string name="at_least_one_number">At least one number</string>
+    <string name="contains_a_lowercase_letter">Contains a lowercase letter</string>
+    <string name="contains_a_uppercase_letter">Contains a uppercase letter</string>
+    <string name="register">Register</string>
 </resources>
