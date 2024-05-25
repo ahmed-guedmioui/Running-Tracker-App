@@ -1,7 +1,6 @@
 package com.ahmed_apps.auth.presentation.register
 
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -12,6 +11,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.ClickableText
+import androidx.compose.foundation.text2.input.TextFieldState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -50,10 +50,12 @@ import org.koin.androidx.compose.koinViewModel
  * @author Ahmed Guedmioui
  */
 @Composable
-
-fun RegisterScreenCore(
+fun RegisterScreenRoot(
+    onSignInClick: () -> Unit,
+    onSuccessfulRegistration: () -> Unit,
     viewModel: RegisterViewModel = koinViewModel()
 ) {
+
     RegisterScreen(
         state = viewModel.state,
         onAction = viewModel::onAction

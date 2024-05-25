@@ -10,8 +10,8 @@ import com.ahmed_apps.auth.domain.PasswordValidationState
 @OptIn(ExperimentalFoundationApi::class)
 data class RegisterState(
     val email: TextFieldState = TextFieldState(),
-    val password: TextFieldState = TextFieldState(),
     val isEmailValid: Boolean = false,
+    val password: TextFieldState = TextFieldState(),
     val isPasswordVisible: Boolean = false,
     val passwordValidationState: PasswordValidationState = PasswordValidationState(),
     val isRegistering: Boolean = false,

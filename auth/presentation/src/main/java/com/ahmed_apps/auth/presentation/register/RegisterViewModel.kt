@@ -24,16 +24,22 @@ class RegisterViewModel(
     init {
         state.email.textAsFlow()
             .onEach { email ->
+                val isValidEmail = userDataValidator.isValidEmail(email.toString())
+                val canRegister = isValidEmail && state.passwordValidationState.isValidPassword && !state.isRegistering
                 state = state.copy(
-                    isEmailValid = userDataValidator.isValidEmail(email.toString())
+                    isEmailValid = isValidEmail,
+                    canRegister =  canRegister
                 )
             }
             .launchIn(viewModelScope)
 
         state.password.textAsFlow()
             .onEach { password ->
+                val passwordValidationState = userDataValidator.isValidPassword(password.toString())
+                val canRegister = state.isEmailValid && passwordValidationState.isValidPassword && !state.isRegistering
                 state = state.copy(
-                    passwordValidationState = userDataValidator.isValidPassword(password.toString())
+                    passwordValidationState = passwordValidationState,
+                    canRegister = canRegister
                 )
             }
             .launchIn(viewModelScope)
@@ -42,15 +48,15 @@ class RegisterViewModel(
     fun onAction(action: RegisterAction) {
         when (action) {
             RegisterAction.ObRegisterClick -> {
-                TODO()
+
             }
 
             RegisterAction.OnLoginClick -> {
-                TODO()
+
             }
 
             RegisterAction.OnTogglePasswordVisibilityClick -> {
-                TODO()
+
             }
         }
     }
