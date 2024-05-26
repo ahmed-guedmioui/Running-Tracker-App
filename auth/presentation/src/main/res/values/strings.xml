@@ -8,7 +8,7 @@
     <string name="create_account">Create Account</string>
     <string name="already_have_an_account">Already have an account?</string>
     <string name="login">Login</string>
-    <string name="example_test_com">example@test.com</string>
+    <string name="example_email">example@test.com</string>
     <string name="email">Email</string>
     <string name="must_be_a_valid_email">Must be a valid email</string>
     <string name="password">Password</string>
@@ -19,4 +19,8 @@
     <string name="register">Register</string>
     <string name="error_email_exists">This email is already taken.</string>
     <string name="registration_successful">Registration Successful, you can login now!</string>
+    <string name="hi_there">Hi there</string>
+    <string name="running_tracker_welcome_text">Welcome to your ultimate running companion! Track, analyze, and conquer your runs.</string>
+    <string name="don_t_have_na_account">Don\'t have na account?</string>
+    <string name="you_re_logged_in">You\'re logged in</string>
 </resources>

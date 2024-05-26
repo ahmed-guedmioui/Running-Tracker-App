@@ -57,7 +57,7 @@ fun RunningTrackerTextField(
     title: String?,
     error: String? = null,
     keyBoardType: KeyboardType = KeyboardType.Text,
-    additionalInfo: String?
+    additionalInfo: String? = null
 ) {
     var isFocused by remember {
         mutableStateOf(false)

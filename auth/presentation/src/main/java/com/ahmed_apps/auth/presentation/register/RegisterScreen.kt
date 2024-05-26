@@ -12,7 +12,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.ClickableText
-import androidx.compose.foundation.text2.input.TextFieldState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -39,7 +38,6 @@ import com.ahmed_apps.core.presentation.designsystem.CrossIcon
 import com.ahmed_apps.core.presentation.designsystem.EmailIcon
 import com.ahmed_apps.core.presentation.designsystem.Poppins
 import com.ahmed_apps.core.presentation.designsystem.RunningTrackerDarkRed
-import com.ahmed_apps.core.presentation.designsystem.RunningTrackerGray
 import com.ahmed_apps.core.presentation.designsystem.RunningTrackerGreen
 import com.ahmed_apps.core.presentation.designsystem.RunningTrackerTheme
 import com.ahmed_apps.core.presentation.designsystem.components.GradientBackground
@@ -54,7 +52,7 @@ import org.koin.androidx.compose.koinViewModel
  * @author Ahmed Guedmioui
  */
 @Composable
-fun RegisterScreenRoot(
+fun RegisterScreenCore(
     onSignInClick: () -> Unit,
     onSuccessfulRegistration: () -> Unit,
     viewModel: RegisterViewModel = koinViewModel()
@@ -88,7 +86,14 @@ fun RegisterScreenRoot(
 
     RegisterScreen(
         state = viewModel.state,
-        onAction = viewModel::onAction
+        onAction = {action ->
+            when(action) {
+                RegisterAction.OnLoginClick -> onSignInClick()
+                else -> Unit
+            }
+
+            viewModel.onAction(action)
+        }
     )
 }
 
@@ -115,7 +120,7 @@ private fun RegisterScreen(
                 withStyle(
                     style = SpanStyle(
                         fontFamily = Poppins,
-                        color = RunningTrackerGray
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                 ) {
                     append(stringResource(R.string.already_have_an_account) + " ")
@@ -150,7 +155,7 @@ private fun RegisterScreen(
                 textFieldState = state.email,
                 startIcon = EmailIcon,
                 endIcon = if (state.isEmailValid) CheckIcon else null,
-                hint = stringResource(R.string.example_test_com),
+                hint = stringResource(R.string.example_email),
                 title = stringResource(R.string.email),
                 modifier = Modifier.fillMaxWidth(),
                 additionalInfo = stringResource(R.string.must_be_a_valid_email),

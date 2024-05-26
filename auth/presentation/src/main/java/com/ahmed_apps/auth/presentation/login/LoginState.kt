@@ -1,4 +1,4 @@
-package com.ahmed_apps.auth.presentation.register
+package com.ahmed_apps.auth.presentation.login
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.text2.input.TextFieldState
@@ -8,14 +8,12 @@ import com.ahmed_apps.auth.domain.PasswordValidationState
  * @author Ahmed Guedmioui
  */
 @OptIn(ExperimentalFoundationApi::class)
-data class RegisterState(
+data class LoginState(
     val email: TextFieldState = TextFieldState(),
-    val isEmailValid: Boolean = false,
     val password: TextFieldState = TextFieldState(),
     val isPasswordVisible: Boolean = false,
-    val passwordValidationState: PasswordValidationState = PasswordValidationState(),
-    val isRegistering: Boolean = false,
-    val canRegister: Boolean = false
+    val canLogin: Boolean = false,
+    val isLoggingIn: Boolean = false,
 )
 
 

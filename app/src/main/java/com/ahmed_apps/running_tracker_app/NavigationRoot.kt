@@ -1,14 +1,14 @@
 package com.ahmed_apps.running_tracker_app
 
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
-import com.ahmed_apps.auth.presentation.intro.IntroScreenRoot
-import com.ahmed_apps.auth.presentation.register.RegisterScreenRoot
+import com.ahmed_apps.auth.presentation.intro.IntroScreenCore
+import com.ahmed_apps.auth.presentation.login.LoginScreenCore
+import com.ahmed_apps.auth.presentation.register.RegisterScreenCore
 
 /**
  * @author Ahmed Guedmioui
@@ -32,7 +32,7 @@ private fun NavGraphBuilder.authGraph(navController: NavHostController) {
         route = "auth"
     ) {
         composable(route = "intro") {
-            IntroScreenRoot(
+            IntroScreenCore(
                 onSignUpClick = {
                     navController.navigate("register")
                 },
@@ -43,7 +43,7 @@ private fun NavGraphBuilder.authGraph(navController: NavHostController) {
         }
 
         composable(route = "register") {
-            RegisterScreenRoot(
+            RegisterScreenCore(
                 onSignInClick = {
                     navController.navigate("login") {
                         popUpTo("register") {
@@ -60,7 +60,24 @@ private fun NavGraphBuilder.authGraph(navController: NavHostController) {
         }
 
         composable(route = "login") {
-            Text("Login")
+           LoginScreenCore(
+               onLoginSuccess = {
+                   navController.navigate("run") {
+                       popUpTo("auth") {
+                           inclusive = true
+                       }
+                   }
+               },
+               inSignUpClick = {
+                   navController.navigate("register") {
+                       popUpTo("login") {
+                           inclusive = true
+                           saveState = true
+                       }
+                       restoreState = true
+                   }
+               }
+           )
         }
     }
 }
