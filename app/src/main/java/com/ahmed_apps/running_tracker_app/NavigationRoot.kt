@@ -18,10 +18,11 @@ import com.ahmed_apps.auth.presentation.register.RegisterScreenCore
 @Composable
 fun NavigationRoot(
     navController: NavHostController,
+    isLoggedIn: Boolean
 ) {
     NavHost(
         navController = navController,
-        startDestination = "auth"
+        startDestination = if (isLoggedIn) "run" else "auth"
     ) {
         authGraph(navController)
         runGraph(navController)
@@ -62,24 +63,24 @@ private fun NavGraphBuilder.authGraph(navController: NavHostController) {
         }
 
         composable(route = "login") {
-           LoginScreenCore(
-               onLoginSuccess = {
-                   navController.navigate("run") {
-                       popUpTo("auth") {
-                           inclusive = true
-                       }
-                   }
-               },
-               inSignUpClick = {
-                   navController.navigate("register") {
-                       popUpTo("login") {
-                           inclusive = true
-                           saveState = true
-                       }
-                       restoreState = true
-                   }
-               }
-           )
+            LoginScreenCore(
+                onLoginSuccess = {
+                    navController.navigate("run") {
+                        popUpTo("auth") {
+                            inclusive = true
+                        }
+                    }
+                },
+                inSignUpClick = {
+                    navController.navigate("register") {
+                        popUpTo("login") {
+                            inclusive = true
+                            saveState = true
+                        }
+                        restoreState = true
+                    }
+                }
+            )
         }
     }
 }
@@ -94,8 +95,6 @@ private fun NavGraphBuilder.runGraph(navController: NavHostController) {
         }
     }
 }
-
-
 
 
 //@Composable
