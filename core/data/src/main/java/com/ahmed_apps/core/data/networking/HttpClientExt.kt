@@ -55,7 +55,7 @@ suspend inline fun <reified Request, reified Response : Any> HttpClient.post(
     return safeCall {
         post {
             url(constructRoute(route))
-           setBody(body)
+            setBody(body)
         }
     }
 }

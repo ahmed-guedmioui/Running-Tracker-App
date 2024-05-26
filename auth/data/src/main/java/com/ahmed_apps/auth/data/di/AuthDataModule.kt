@@ -1,9 +1,12 @@
 package com.ahmed_apps.auth.data.di
 
+import com.ahmed_apps.auth.data.AuthRepositoryImpl
 import com.ahmed_apps.auth.data.EmailPatternValidator
+import com.ahmed_apps.auth.domain.AuthRepository
 import com.ahmed_apps.auth.domain.UserDataValidator
 import com.ahmed_apps.auth.domain.PatternValidator
 import org.koin.core.module.dsl.singleOf
+import org.koin.dsl.bind
 import org.koin.dsl.module
 
 /**
@@ -15,6 +18,7 @@ val authDataModule = module {
         EmailPatternValidator
     }
     singleOf(::UserDataValidator)
+    singleOf(::AuthRepositoryImpl).bind<AuthRepository>()
 }
 
 

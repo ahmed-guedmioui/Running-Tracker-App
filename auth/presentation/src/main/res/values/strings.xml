@@ -17,4 +17,6 @@
     <string name="contains_a_lowercase_letter">Contains a lowercase letter</string>
     <string name="contains_a_uppercase_letter">Contains a uppercase letter</string>
     <string name="register">Register</string>
+    <string name="error_email_exists">This email is already taken.</string>
+    <string name="registration_successful">Registration Successful, you can login now!</string>
 </resources>

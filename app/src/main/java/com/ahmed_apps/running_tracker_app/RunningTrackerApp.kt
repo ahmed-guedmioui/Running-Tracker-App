@@ -3,6 +3,7 @@ package com.ahmed_apps.running_tracker_app
 import android.app.Application
 import com.ahmed_apps.auth.data.di.authDataModule
 import com.ahmed_apps.auth.di.authViewModelModule
+import com.ahmed_apps.core.data.di.coreDataModule
 import com.ahmed_apps.running_tracker_app.di.appModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -27,7 +28,8 @@ class RunningTrackerApp: Application() {
             modules(
                 appModule,
                 authDataModule,
-                authViewModelModule
+                authViewModelModule,
+                coreDataModule
             )
         }
     }
