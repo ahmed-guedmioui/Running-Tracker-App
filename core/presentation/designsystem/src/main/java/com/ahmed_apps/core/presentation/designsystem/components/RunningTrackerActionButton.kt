@@ -75,8 +75,8 @@ fun RunningTrackerActionButton(
 fun RunningTrackerOutlinedActionButton(
     modifier: Modifier = Modifier,
     text: String,
-    isLoading: Boolean,
-    enabled: Boolean,
+    isLoading: Boolean = false,
+    enabled: Boolean = true,
     onClick: () -> Unit
 ) {
     OutlinedButton(

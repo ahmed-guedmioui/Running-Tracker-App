@@ -10,6 +10,8 @@ import androidx.navigation.compose.navigation
 import com.ahmed_apps.auth.presentation.intro.IntroScreenCore
 import com.ahmed_apps.auth.presentation.login.LoginScreenCore
 import com.ahmed_apps.auth.presentation.register.RegisterScreenCore
+import com.ahmed_apps.run.presentation.active_run.ActiveRunScreenCore
+import com.ahmed_apps.run.presentation.run_overview.RunOverviewScreenCore
 
 /**
  * @author Ahmed Guedmioui
@@ -91,7 +93,14 @@ private fun NavGraphBuilder.runGraph(navController: NavHostController) {
         route = "run"
     ) {
         composable("run_overview") {
-            Text("run_overview")
+            RunOverviewScreenCore(
+                onStartRunClick = {
+                    navController.navigate("active_run")
+                }
+            )
+        }
+        composable("active_run") {
+            ActiveRunScreenCore()
         }
     }
 }
