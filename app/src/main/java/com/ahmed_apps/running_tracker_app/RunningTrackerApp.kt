@@ -4,8 +4,11 @@ import android.app.Application
 import com.ahmed_apps.auth.data.di.authDataModule
 import com.ahmed_apps.auth.di.authViewModelModule
 import com.ahmed_apps.core.data.di.coreDataModule
-import com.ahmed_apps.run.di.runViewModelModule
+import com.ahmed_apps.run.di.runPresentationModule
+import com.ahmed_apps.run.location.di.locationModule
 import com.ahmed_apps.running_tracker_app.di.appModule
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.SupervisorJob
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -15,6 +18,9 @@ import timber.log.Timber
  * @author Ahmed Guedmioui
  */
 class RunningTrackerApp: Application() {
+
+    val applicationScope = CoroutineScope(SupervisorJob())
+
     override fun onCreate() {
         super.onCreate()
 
@@ -29,8 +35,9 @@ class RunningTrackerApp: Application() {
                 appModule,
                 authDataModule,
                 authViewModelModule,
-                runViewModelModule,
-                coreDataModule
+                runPresentationModule,
+                coreDataModule,
+                locationModule
             )
         }
     }
