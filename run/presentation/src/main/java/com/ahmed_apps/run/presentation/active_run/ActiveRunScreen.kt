@@ -7,7 +7,6 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.compose.animation.fadeIn
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -32,6 +31,7 @@ import com.ahmed_apps.core.presentation.designsystem.components.RunningTrackerSc
 import com.ahmed_apps.core.presentation.designsystem.components.RunningTrackerToolbar
 import com.ahmed_apps.run.presentation.R
 import com.ahmed_apps.run.presentation.active_run.components.RunDataCard
+import com.ahmed_apps.run.presentation.active_run.maps.TrackerMap
 import com.ahmed_apps.run.presentation.util.hasLocationPermission
 import com.ahmed_apps.run.presentation.util.hasNotificationPermission
 import com.ahmed_apps.run.presentation.util.shouldShowLocationPermissionRationale
@@ -67,10 +67,10 @@ private fun ActiveRunScreen(
         val hasFineLocationPermission = perms[Manifest.permission.ACCESS_FINE_LOCATION] == true
         val hasNotificationPermission =
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            perms[Manifest.permission.POST_NOTIFICATIONS] == true
-        } else {
-            true
-        }
+                perms[Manifest.permission.POST_NOTIFICATIONS] == true
+            } else {
+                true
+            }
 
         val activity = context as ComponentActivity
         val showLocationRationale = activity.shouldShowLocationPermissionRationale()
@@ -149,6 +149,15 @@ private fun ActiveRunScreen(
                 .fillMaxSize()
                 .background(MaterialTheme.colorScheme.surface)
         ) {
+
+            TrackerMap(
+                isRunFinished = state.isRunFinished,
+                currentLocation = state.currentLocation,
+                locations = state.runData.locations,
+                onSnapshot = {},
+                modifier = Modifier.fillMaxSize()
+            )
+
             RunDataCard(
                 runData = state.runData,
                 elapsedTime = state.elapsedTime,
