@@ -30,8 +30,8 @@ import com.ahmed_apps.core.presentation.designsystem.RunningTrackerGray
 fun RunningTrackerActionButton(
     modifier: Modifier = Modifier,
     text: String,
-    isLoading: Boolean,
-    enabled: Boolean,
+    isLoading: Boolean = false,
+    enabled: Boolean = true,
     onClick: () -> Unit
 ) {
     Button(

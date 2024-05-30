@@ -24,6 +24,7 @@ import androidx.compose.ui.unit.dp
 import com.ahmed_apps.core.presentation.designsystem.RunningTrackerTheme
 import com.ahmed_apps.core.presentation.designsystem.StartIcon
 import com.ahmed_apps.core.presentation.designsystem.StopIcon
+import com.ahmed_apps.core.presentation.designsystem.components.RunningTrackerActionButton
 import com.ahmed_apps.core.presentation.designsystem.components.RunningTrackerDialog
 import com.ahmed_apps.core.presentation.designsystem.components.RunningTrackerFloatingActionButton
 import com.ahmed_apps.core.presentation.designsystem.components.RunningTrackerOutlinedActionButton
@@ -167,6 +168,35 @@ private fun ActiveRunScreen(
                     .fillMaxWidth()
             )
         }
+    }
+
+    if (!state.shouldTrack && state.hasStartedRunning) {
+        RunningTrackerDialog(
+            title = stringResource(R.string.running_is_paused),
+            description = stringResource(R.string.resume_or_finish_run),
+            onDismiss = {
+                onAction(ActiveRunAction.OnResumeRunClick)
+            },
+            primaryButton = {
+                RunningTrackerActionButton(
+                    text = stringResource(R.string.resume),
+                    onClick = {
+                        onAction(ActiveRunAction.OnResumeRunClick)
+                    },
+                    modifier = Modifier.weight(1f)
+                )
+            },
+            secondaryButton = {
+                RunningTrackerOutlinedActionButton(
+                    text = stringResource(R.string.finish),
+                    isLoading = state.isSavingRun,
+                    onClick = {
+                        onAction(ActiveRunAction.OnFinishRunClick)
+                    },
+                    modifier = Modifier.weight(1f)
+                )
+            }
+        )
     }
 
     if (state.showLocationRationale || state.showNotificationRationale) {
