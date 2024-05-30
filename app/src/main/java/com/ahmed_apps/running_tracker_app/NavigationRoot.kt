@@ -2,15 +2,18 @@ package com.ahmed_apps.running_tracker_app
 
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
+import androidx.navigation.navDeepLink
 import com.ahmed_apps.auth.presentation.intro.IntroScreenCore
 import com.ahmed_apps.auth.presentation.login.LoginScreenCore
 import com.ahmed_apps.auth.presentation.register.RegisterScreenCore
 import com.ahmed_apps.run.presentation.active_run.ActiveRunScreenCore
+import com.ahmed_apps.run.presentation.active_run.service.ActiveRunService
 import com.ahmed_apps.run.presentation.run_overview.RunOverviewScreenCore
 
 /**
@@ -99,8 +102,34 @@ private fun NavGraphBuilder.runGraph(navController: NavHostController) {
                 }
             )
         }
-        composable("active_run") {
-            ActiveRunScreenCore()
+        composable(
+            route = "active_run",
+            deepLinks = listOf(
+                navDeepLink {
+                    uriPattern = "running_tracker://active_run"
+                }
+            )
+        ) {
+            val context = LocalContext.current
+
+            ActiveRunScreenCore(
+                onServiceToggle = { shouldRunService ->
+                    if (shouldRunService) {
+                        context.startService(
+                            ActiveRunService.createStartIntent(
+                                context = context,
+                                activityClass = MainActivity::class.java
+                            )
+                        )
+                    } else {
+                        context.startService(
+                            ActiveRunService.createStopIntent(
+                                context = context
+                            )
+                        )
+                    }
+                }
+            )
         }
     }
 }
