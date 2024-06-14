@@ -1,6 +1,7 @@
 package com.ahmed_apps.run.presentation.run_overview.mappers
 
 import com.ahmed_apps.core.domian.run.Run
+import com.ahmed_apps.core.presentation.ui.formatted
 import com.ahmed_apps.core.presentation.ui.toFormattedKm
 import com.ahmed_apps.core.presentation.ui.toFormattedKmh
 import com.ahmed_apps.core.presentation.ui.toFormattedMeters
@@ -24,7 +25,8 @@ fun Run.toRunUi(): RunUi {
 
     return RunUi(
         id = id!!,
-        duration = formattedDateTime,
+        duration = duration.formatted(),
+        dateTime = formattedDateTime,
         distance = distanceKm.toFormattedKm(),
         avgSpeed = avgSpeedKmh.toFormattedKmh(),
         maxSpeed = maxSpeedKmh.toFormattedKmh(),

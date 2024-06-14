@@ -22,7 +22,8 @@ val DarkColorScheme = darkColorScheme(
     onBackground = RunningTrackerWhite,
     onSurface = RunningTrackerWhite,
     onSurfaceVariant = RunningTrackerGray,
-    error = RunningTrackerDarkRed
+    error = RunningTrackerDarkRed,
+    errorContainer = RunningTrackerDarkRed5
 )
 
 @Composable
