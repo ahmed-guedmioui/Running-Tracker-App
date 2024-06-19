@@ -2,6 +2,7 @@ package com.ahmed_apps.run.presentation.active_run
 
 import android.Manifest
 import android.content.Context
+import android.graphics.Bitmap
 import android.os.Build
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -39,6 +40,7 @@ import com.ahmed_apps.run.presentation.util.hasNotificationPermission
 import com.ahmed_apps.run.presentation.util.shouldShowLocationPermissionRationale
 import com.ahmed_apps.run.presentation.util.shouldShowNotificationPermissionRationale
 import org.koin.androidx.compose.koinViewModel
+import java.io.ByteArrayOutputStream
 
 /**
  * @author Ahmed Guedmioui
@@ -168,11 +170,19 @@ private fun ActiveRunScreen(
         ) {
 
             TrackerMap(
+                modifier = Modifier.fillMaxSize(),
                 isRunFinished = state.isRunFinished,
                 currentLocation = state.currentLocation,
                 locations = state.runData.locations,
-                onSnapshot = {},
-                modifier = Modifier.fillMaxSize()
+                onSnapshot = { bitmap ->
+                    val stream = ByteArrayOutputStream()
+                    stream.use {
+                        bitmap.compress(
+                            Bitmap.CompressFormat.PNG, 80, it
+                        )
+                    }
+                    onAction(ActiveRunAction.OnRunProcessed(stream.toByteArray()))
+                }
             )
 
             RunDataCard(
