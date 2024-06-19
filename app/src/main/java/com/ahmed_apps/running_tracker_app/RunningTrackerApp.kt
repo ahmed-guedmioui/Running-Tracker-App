@@ -4,6 +4,7 @@ import android.app.Application
 import com.ahmed_apps.auth.data.di.authDataModule
 import com.ahmed_apps.auth.di.authViewModelModule
 import com.ahmed_apps.core.data.di.coreDataModule
+import com.ahmed_apps.core.database.di.databaseModule
 import com.ahmed_apps.run.di.runPresentationModule
 import com.ahmed_apps.run.location.di.locationModule
 import com.ahmed_apps.running_tracker_app.di.appModule
@@ -37,7 +38,8 @@ class RunningTrackerApp: Application() {
                 authViewModelModule,
                 runPresentationModule,
                 coreDataModule,
-                locationModule
+                locationModule,
+                databaseModule
             )
         }
     }
