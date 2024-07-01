@@ -7,6 +7,7 @@ import com.ahmed_apps.core.data.di.coreDataModule
 import com.ahmed_apps.core.database.di.databaseModule
 import com.ahmed_apps.run.di.runPresentationModule
 import com.ahmed_apps.run.location.di.locationModule
+import com.ahmed_apps.run.network.di.networkModule
 import com.ahmed_apps.running_tracker_app.di.appModule
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
@@ -39,7 +40,8 @@ class RunningTrackerApp: Application() {
                 runPresentationModule,
                 coreDataModule,
                 locationModule,
-                databaseModule
+                databaseModule,
+                networkModule
             )
         }
     }

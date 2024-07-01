@@ -1,6 +1,12 @@
 package com.ahmed_apps.run.presentation.run_overview
 
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -8,6 +14,7 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -21,6 +28,7 @@ import com.ahmed_apps.core.presentation.designsystem.components.RunningTrackerSc
 import com.ahmed_apps.core.presentation.designsystem.components.RunningTrackerToolbar
 import com.ahmed_apps.core.presentation.designsystem.components.util.DropDownMenuItem
 import com.ahmed_apps.run.presentation.R
+import com.ahmed_apps.run.presentation.run_overview.component.RunListItem
 import org.koin.androidx.compose.koinViewModel
 
 /**
@@ -33,6 +41,7 @@ fun RunOverviewScreenCore(
     viewModel: RunOverviewViewModel = koinViewModel()
 ) {
     RunOverviewScreen(
+        state = viewModel.state,
         onAction = { action ->
             when (action) {
                 RunOverviewAction.OnStartRun -> onStartRunClick()
@@ -43,9 +52,10 @@ fun RunOverviewScreenCore(
     )
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 @Composable
 private fun RunOverviewScreen(
+    state: RunOverviewState,
     onAction: (RunOverviewAction) -> Unit
 ) {
 
@@ -95,6 +105,27 @@ private fun RunOverviewScreen(
             )
         }
     ) { paddingValues ->
+        LazyColumn(
+            modifier = Modifier
+                .fillMaxSize()
+                .nestedScroll(scrollBehavior.nestedScrollConnection)
+                .padding(horizontal = 16.dp),
+            contentPadding = paddingValues,
+            verticalArrangement = Arrangement.spacedBy(16.dp)
+        ) {
+            items(
+                items = state.runs,
+                key = { it.id }
+            ) { runUi ->
+                RunListItem(
+                    runUi = runUi,
+                    onDelete = {
+                        onAction(RunOverviewAction.DeleteRun(runUi))
+                    },
+                    modifier = Modifier.animateItemPlacement()
+                )
+            }
+        }
     }
 
 }
@@ -104,6 +135,7 @@ private fun RunOverviewScreen(
 private fun RunOverviewScreenPreview() {
     RunningTrackerTheme {
         RunOverviewScreen(
+            state = RunOverviewState(),
             onAction = {}
         )
     }

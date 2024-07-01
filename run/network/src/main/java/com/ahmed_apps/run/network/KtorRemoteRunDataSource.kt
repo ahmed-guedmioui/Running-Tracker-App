@@ -25,6 +25,7 @@ import kotlinx.serialization.json.Json
 class KtorRemoteRunDataSource(
     private val httpClient: HttpClient
 ) : RemoteRunDataSource {
+
     override suspend fun getRuns(): Result<List<Run>, DataError.Network> {
         return httpClient.get<List<RunDto>>(
             route = "/runs",

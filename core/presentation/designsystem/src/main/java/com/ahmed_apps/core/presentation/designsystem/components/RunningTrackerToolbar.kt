@@ -58,67 +58,72 @@ fun RunningTrackerToolbar(
         mutableStateOf(false)
     }
 
-    TopAppBar(title = {
-        Row(
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            startContent?.invoke()
-            Spacer(modifier = Modifier.width(8.dp))
-            Text(
-                text = title,
-                fontWeight = FontWeight.SemiBold,
-                color = MaterialTheme.colorScheme.onBackground,
-                fontFamily = Poppins
-            )
-        }
-    }, scrollBehavior = scrollBehavior, colors = TopAppBarDefaults.topAppBarColors(
-        containerColor = Color.Transparent
-    ), navigationIcon = {
-        if (showBackButton) {
-            IconButton(onClick = onBackClick) {
-                Icon(
-                    imageVector = ArrowLeftIcon,
-                    contentDescription = stringResource(R.string.go_back),
-                    tint = MaterialTheme.colorScheme.onBackground
+    TopAppBar(
+        title = {
+            Row(
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                startContent?.invoke()
+                Spacer(modifier = Modifier.width(8.dp))
+                Text(
+                    text = title,
+                    fontWeight = FontWeight.SemiBold,
+                    color = MaterialTheme.colorScheme.onBackground,
+                    fontFamily = Poppins
                 )
             }
-        }
-    }, actions = {
-        if (menuItems.isNotEmpty()) {
-            Box {
-                DropdownMenu(
-                    expanded = isDropDownOpen,
-                    onDismissRequest = {
-                        isDropDownOpen = false
-                    }
-                ) {
-                    menuItems.forEachIndexed { index, item ->
-                        Row(
-                            verticalAlignment = Alignment.CenterVertically,
-                            modifier = Modifier
-                                .clickable { onMenuItemClick(index) }
-                                .fillMaxWidth()
-                                .padding(16.dp)
-                        ) {
-                            Icon(
-                                imageVector = item.icon,
-                                contentDescription = item.title
-                            )
-                            Spacer(modifier = modifier.width(8.dp))
-                            Text(text = item.title)
-                        }
-                    }
-                }
-                IconButton(onClick = { isDropDownOpen = true }) {
+        },
+        scrollBehavior = scrollBehavior,
+        colors = TopAppBarDefaults.topAppBarColors(
+            containerColor = Color.Transparent
+        ),
+        navigationIcon = {
+            if (showBackButton) {
+                IconButton(onClick = onBackClick) {
                     Icon(
-                        imageVector = Icons.Default.MoreVert,
-                        contentDescription = stringResource(R.string.open_menu),
-                        tint = MaterialTheme.colorScheme.onSurfaceVariant
+                        imageVector = ArrowLeftIcon,
+                        contentDescription = stringResource(R.string.go_back),
+                        tint = MaterialTheme.colorScheme.onBackground
                     )
                 }
             }
-        }
-    })
+        },
+        actions = {
+            if (menuItems.isNotEmpty()) {
+                Box {
+                    DropdownMenu(
+                        expanded = isDropDownOpen,
+                        onDismissRequest = {
+                            isDropDownOpen = false
+                        }
+                    ) {
+                        menuItems.forEachIndexed { index, item ->
+                            Row(
+                                verticalAlignment = Alignment.CenterVertically,
+                                modifier = Modifier
+                                    .clickable { onMenuItemClick(index) }
+                                    .fillMaxWidth()
+                                    .padding(16.dp)
+                            ) {
+                                Icon(
+                                    imageVector = item.icon,
+                                    contentDescription = item.title
+                                )
+                                Spacer(modifier = modifier.width(8.dp))
+                                Text(text = item.title)
+                            }
+                        }
+                    }
+                    IconButton(onClick = { isDropDownOpen = true }) {
+                        Icon(
+                            imageVector = Icons.Default.MoreVert,
+                            contentDescription = stringResource(R.string.open_menu),
+                            tint = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                    }
+                }
+            }
+        })
 
 }
 

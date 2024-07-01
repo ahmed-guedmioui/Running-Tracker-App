@@ -63,7 +63,7 @@ import kotlin.time.Duration.Companion.seconds
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun RunListItemUi(
+fun RunListItem(
     modifier: Modifier = Modifier,
     runUi: RunUi,
     onDelete: () -> Unit
@@ -311,7 +311,7 @@ private fun DataGridCell(
 @Composable
 private fun RunListItemUiPreview() {
     RunningTrackerTheme {
-        RunListItemUi(
+        RunListItem(
             runUi = Run(
                 id = "123",
                 duration = 12.minutes + 23.seconds,
