@@ -32,7 +32,7 @@ import kotlin.time.toJavaDuration
  * @author Ahmed Guedmioui
  */
 class SyncRunWorkerScheduler(
-    private val context: Context,
+    context: Context,
     private val pendingSyncDao: RunPendingSyncDao,
     private val sessionStorage: SessionStorage,
     private val applicationScope: CoroutineScope
