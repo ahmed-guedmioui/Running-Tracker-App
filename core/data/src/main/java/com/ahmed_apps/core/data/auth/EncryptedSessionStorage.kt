@@ -32,10 +32,7 @@ class EncryptedSessionStorage(
             }
 
             val json = Json.encodeToString(info.toAuthInfoSerializable())
-            sharedPreferences
-                .edit()
-                .putString(KEY_AUTH_INFO, json)
-                .commit()
+            sharedPreferences.edit().putString(KEY_AUTH_INFO, json).commit()
         }
     }
 
