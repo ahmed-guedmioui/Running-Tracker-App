@@ -1,4 +1,4 @@
-package com.ahmed_apps.run.data
+package com.ahmed_apps.run.data.workers
 
 import android.content.Context
 import androidx.work.CoroutineWorker
@@ -6,7 +6,6 @@ import androidx.work.WorkerParameters
 import com.ahmed_apps.core.database.dao.RunPendingSyncDao
 import com.ahmed_apps.core.database.mappers.toRun
 import com.ahmed_apps.core.domian.run.RemoteRunDataSource
-import com.ahmed_apps.core.domian.util.Result
 
 /**
  * @author Ahmed Guedmioui

@@ -3,6 +3,7 @@ package com.ahmed_apps.core.database.dao
 import androidx.room.Dao
 import androidx.room.Query
 import androidx.room.Upsert
+import com.ahmed_apps.core.database.entity.DeletedRunSyncEntity
 import com.ahmed_apps.core.database.entity.RunPendingSyncEntity
 
 /**
@@ -29,10 +30,10 @@ interface RunPendingSyncDao {
     // Deleted Runs
 
     @Query("SELECT * FROM deletedRunSyncEntity WHERE userId = :userId")
-    suspend fun getAllDeletedRunSyncEntities(userId: String): List<RunPendingSyncEntity>
+    suspend fun getAllDeletedRunSyncEntities(userId: String): List<DeletedRunSyncEntity>
 
     @Upsert
-    suspend fun upsertDeletedRunSyncEntity(entity: RunPendingSyncEntity)
+    suspend fun upsertDeletedRunSyncEntity(entity: DeletedRunSyncEntity)
 
     @Query("DELETE FROM deletedRunSyncEntity WHERE runId = :runId")
     suspend fun deleteDeletedRunSyncEntity(runId: String)

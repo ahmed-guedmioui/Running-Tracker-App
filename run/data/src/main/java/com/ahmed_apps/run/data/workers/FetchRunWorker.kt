@@ -1,10 +1,9 @@
-package com.ahmed_apps.run.data
+package com.ahmed_apps.run.data.workers
 
 import android.content.Context
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 import com.ahmed_apps.core.domian.run.RunRepository
-import com.ahmed_apps.core.domian.util.DataError
 
 /**
  * @author Ahmed Guedmioui

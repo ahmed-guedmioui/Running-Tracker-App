@@ -7,6 +7,7 @@ import com.ahmed_apps.core.domian.run.RemoteRunDataSource
 import com.ahmed_apps.core.domian.run.Run
 import com.ahmed_apps.core.domian.run.RunId
 import com.ahmed_apps.core.domian.run.RunRepository
+import com.ahmed_apps.core.domian.run.SyncRunScheduler
 import com.ahmed_apps.core.domian.util.DataError
 import com.ahmed_apps.core.domian.util.EmptyResult
 import com.ahmed_apps.core.domian.util.Result
@@ -27,7 +28,8 @@ class OfflineFirstRunRepository(
     private val remoteRunDataSource: RemoteRunDataSource,
     private val applicationScope: CoroutineScope,
     private val runPendingSyncDao: RunPendingSyncDao,
-    private val sessionStorage: SessionStorage
+    private val sessionStorage: SessionStorage,
+    private val syncRunScheduler: SyncRunScheduler
 ) : RunRepository {
 
     override fun getRuns(): Flow<List<Run>> {
@@ -60,6 +62,13 @@ class OfflineFirstRunRepository(
 
         return when (remoteResult) {
             is Result.Error -> {
+                applicationScope.launch {
+                    syncRunScheduler.scheduleSync(
+                        syncType = SyncRunScheduler.SyncType.CreateRun(
+                            run = runWithId, mapPictureBytes = mapPicture
+                        )
+                    )
+                }.join()
                 Result.Success(Unit)
             }
 
@@ -86,6 +95,13 @@ class OfflineFirstRunRepository(
             remoteRunDataSource.deleteRun(id)
         }.await()
 
+        if (remoteResult is Result.Error) {
+            applicationScope.launch {
+                syncRunScheduler.scheduleSync(
+                    syncType = SyncRunScheduler.SyncType.DeleteRun(id)
+                )
+            }.join()
+        }
     }
 
     override suspend fun syncPendingRuns() {
