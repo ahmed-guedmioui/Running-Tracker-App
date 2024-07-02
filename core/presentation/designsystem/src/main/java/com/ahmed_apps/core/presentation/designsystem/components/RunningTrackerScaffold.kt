@@ -21,7 +21,7 @@ fun RunningTrackerScaffold(
         topBar = topAppBar,
         floatingActionButton = floatingActionButton,
         floatingActionButtonPosition = FabPosition.Center,
-        modifier = Modifier
+        modifier = modifier
     ) { paddingValues ->
         if (withGradient) {
             GradientBackground {

@@ -144,7 +144,6 @@ class ActiveRunViewModel(
                 finishRun(action.mapPictureBytes)
             }
 
-            else -> Unit
         }
     }
 

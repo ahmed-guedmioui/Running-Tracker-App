@@ -1,8 +1,8 @@
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:width="60dp"
-    android:height="67dp"
+    android:height="60dp"
     android:viewportWidth="60"
-    android:viewportHeight="67">
+    android:viewportHeight="60">
     <group
         android:name="scale"
         android:pivotX="30"
