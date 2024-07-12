@@ -7,6 +7,7 @@ android {
 
 dependencies {
     implementation(project(":app"))
+
     api(projects.analytics.presentation)
     implementation(projects.analytics.domain)
     implementation(projects.analytics.data)
