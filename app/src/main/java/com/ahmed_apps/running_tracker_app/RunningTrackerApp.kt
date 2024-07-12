@@ -1,6 +1,7 @@
 package com.ahmed_apps.running_tracker_app
 
 import android.app.Application
+import android.content.Context
 import com.ahmed_apps.auth.data.di.authDataModule
 import com.ahmed_apps.auth.di.authViewModelModule
 import com.ahmed_apps.core.data.di.coreDataModule
@@ -10,6 +11,7 @@ import com.ahmed_apps.run.di.runPresentationModule
 import com.ahmed_apps.run.location.di.locationModule
 import com.ahmed_apps.run.network.di.networkModule
 import com.ahmed_apps.running_tracker_app.di.appModule
+import com.google.android.play.core.splitcompat.SplitCompat
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
 import org.koin.android.ext.koin.androidContext
@@ -48,6 +50,11 @@ class RunningTrackerApp: Application() {
                 runDataModule
             )
         }
+    }
+
+    override fun attachBaseContext(base: Context?) {
+        super.attachBaseContext(base)
+        SplitCompat.install(this)
     }
 }
 
