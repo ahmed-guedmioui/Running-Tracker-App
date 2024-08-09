@@ -2,9 +2,9 @@ package com.ahmed_apps.analytics.presentation
 
 import com.ahmed_apps.analytics.domain.AnalyticsValues
 import com.ahmed_apps.core.presentation.ui.formatted
+import com.ahmed_apps.core.presentation.ui.toFormattedChartKmh
 import com.ahmed_apps.core.presentation.ui.toFormattedKm
 import com.ahmed_apps.core.presentation.ui.toFormattedKmh
-import com.ahmed_apps.core.presentation.ui.toFormattedPace
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.seconds
 import kotlin.time.DurationUnit
@@ -26,8 +26,9 @@ fun AnalyticsValues.toAnalyticsDashboardState(): AnalyticsDashboardState {
         totalDistanceRun = (totalDistanceRun / 1000.0).toFormattedKm(),
         totalTimeRun = totalTimeRun.toFormattedTotalTime(),
         fastestEverRun = fastestEverRun.toFormattedKmh(),
-        avrDistance = (avrDistancePerRun / 1000.0).toFormattedKm(),
-        avrPace = avrPacePerRun.seconds.formatted()
+        avrDistancePerRun = (avrDistancePerRun / 1000.0).toFormattedKm(),
+        avrPacePerRun = avrPacePerRun.seconds.formatted(),
+        distances = distances.map { it.toFormattedChartKmh() }
     )
 }
 

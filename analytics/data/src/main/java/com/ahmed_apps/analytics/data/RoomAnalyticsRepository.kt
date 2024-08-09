@@ -6,6 +6,9 @@ import com.ahmed_apps.core.database.dao.AnalyticsDao
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.withContext
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+import java.util.Locale
 import kotlin.time.Duration.Companion.microseconds
 
 /**
@@ -17,18 +20,21 @@ class RoomAnalyticsRepository(
 
     override suspend fun getAnalyticsValues(): AnalyticsValues {
         return withContext(Dispatchers.IO) {
+            val allRuns = async { analyticsDao.getAllRuns() }
             val totalDistance = async { analyticsDao.getTotalDistanceRun() }
             val totalTimeMillis = async { analyticsDao.getTotalTimeRun() }
             val maxRunSpeed = async { analyticsDao.getGetMaxSpeed() }
             val avgDistancePerRun = async { analyticsDao.getAvgDistancePerRun() }
             val avgPacePerRun = async { analyticsDao.getAvgPacePerRun() }
 
+
             AnalyticsValues(
                 totalDistanceRun = totalDistance.await(),
                 totalTimeRun = totalTimeMillis.await().microseconds,
                 fastestEverRun = maxRunSpeed.await(),
                 avrDistancePerRun = avgDistancePerRun.await(),
-                avrPacePerRun = avgPacePerRun.await()
+                avrPacePerRun = avgPacePerRun.await(),
+                distances = allRuns.await().map { it.distanceMeters }
             )
         }
     }

@@ -7,6 +7,7 @@ data class AnalyticsDashboardState(
     val totalDistanceRun: String,
     val totalTimeRun: String,
     val fastestEverRun: String,
-    val avrDistance: String,
-    val avrPace: String
+    val avrDistancePerRun: String,
+    val avrPacePerRun: String,
+    val distances: List<Double>
 )

@@ -38,6 +38,10 @@ fun Double.toFormattedKmh(): String {
     return "${roundToDecimals(1)} km/h"
 }
 
+fun Int.toFormattedChartKmh(): Double {
+    return (this / 1000.0).roundToDecimals(1)
+}
+
 fun Int.toFormattedMeters(): String {
     return "$this m"
 }
