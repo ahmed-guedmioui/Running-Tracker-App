@@ -4,7 +4,9 @@
 
 ## Overview
 
-The Running Tracker App is a native Android application built to demonstrate industry-level Android development practices. This app is designed to track running activities, offering features like real-time route mapping, performance analytics, and data synchronization across devices. It leverages modern Android development techniques and libraries to ensure a scalable, maintainable, and user-friendly experience.
+The Running Tracker App is a multi-module native Android application built with Kotin and Jetpack Compose to demonstrate industry-level Android development practices. This app is designed to track running activities, offering features like real-time route mapping, performance analytics, data synchronization across devices, and offline functionality. It leverages modern Android development techniques and libraries to ensure a scalable, maintainable, and user-friendly experience.
+
+With this app, you can effortlessly track your runs and monitor key statistics such as distance, duration, pace, heart rate, and more. Your run data is securely saved to your account, allowing you to easily access it by logging in from any device. Additionally, you have the flexibility to delete runs, and analyze your performance with detailed graphical analytics.
 
 ## Features
 
@@ -22,7 +24,7 @@ Secure and reliable OAuth authentication system integrated for user management.
 Robust offline capabilities using Room for local storage and Ktor for network operations.
 - **Dynamic Feature Modules**
 Modular design with dynamic feature modules, allowing on-demand feature loading.
-- **Google Maps Integration
+- **Google Maps Integration**
 Real-time route mapping using the Google Maps SDK.
 - **Wear OS Support**
 Comprehensive Wear OS support, including theming, exercise tracking, and health data management.
