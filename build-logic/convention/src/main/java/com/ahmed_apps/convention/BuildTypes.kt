@@ -21,15 +21,16 @@ internal fun Project.configureBuildTypes(
         }
 
         val apiKey = gradleLocalProperties(rootDir).getProperty("API_KEY")
+        val mapsApiKey = gradleLocalProperties(rootDir).getProperty("MAPS_API_KEY")
         when (extensionType) {
             ExtensionType.APPLICATION -> {
                 extensions.configure<ApplicationExtension> {
                     buildTypes {
                         debug {
-                            configureDebugBuildType(apiKey)
+                            configureDebugBuildType(apiKey, mapsApiKey)
                         }
                         release {
-                            configureReleaseBuildType(commonExtension, apiKey)
+                            configureReleaseBuildType(commonExtension, apiKey, mapsApiKey)
                         }
                     }
                 }
@@ -39,10 +40,10 @@ internal fun Project.configureBuildTypes(
                 extensions.configure<LibraryExtension> {
                     buildTypes {
                         debug {
-                            configureDebugBuildType(apiKey)
+                            configureDebugBuildType(apiKey, mapsApiKey)
                         }
                         release {
-                            configureReleaseBuildType(commonExtension, apiKey)
+                            configureReleaseBuildType(commonExtension, apiKey, mapsApiKey)
                         }
                     }
                 }
@@ -52,16 +53,22 @@ internal fun Project.configureBuildTypes(
 }
 
 
-private fun BuildType.configureDebugBuildType(apiKey: String) {
+private fun BuildType.configureDebugBuildType(
+    apiKey: String,
+    mapsApiKey: String,
+) {
     buildConfigField("String", "API_KEY", "\"$apiKey\"")
+    buildConfigField("String", "MAPS_API_KEY", "\"$mapsApiKey\"")
     buildConfigField("String", "BASE_URL", "\"https://runique.pl-coding.com:8080\"")
 }
 
 private fun BuildType.configureReleaseBuildType(
     commonExtension: CommonExtension<*, *, *, *, *>,
-    apiKey: String
+    apiKey: String,
+    mapsApiKey: String
 ) {
     buildConfigField("String", "API_KEY", "\"$apiKey\"")
+    buildConfigField("String", "MAPS_API_KEY", "\"$mapsApiKey\"")
     buildConfigField("String", "BASE_URL", "\"https://runique.pl-coding.com:8080\"")
 
     isMinifyEnabled = true
