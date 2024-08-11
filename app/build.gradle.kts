@@ -1,7 +1,6 @@
 plugins {
     alias(libs.plugins.runningTrackerApp.android.application.compose)
     alias(libs.plugins.runningTrackerApp.jvm.ktor)
-    alias(libs.plugins.mapsplatform.secrets.plugin)
 }
 
 android {
@@ -19,6 +18,7 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
+    dynamicFeatures += setOf(":analytics:analytics_feature")
 }
 
 dependencies {
@@ -42,6 +42,9 @@ dependencies {
 
     // Crypto
     implementation(libs.androidx.security.crypto.ktx)
+
+    // Koin
+    implementation(libs.bundles.koin)
 
     api(libs.core)
 
