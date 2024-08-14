@@ -9,5 +9,4 @@ android {
 dependencies {
 
     implementation(projects.analytics.domain)
-    implementation(libs.androidx.core.i18n)
 }

@@ -46,6 +46,12 @@
             <option value="$PROJECT_DIR$/run/location" />
             <option value="$PROJECT_DIR$/run/network" />
             <option value="$PROJECT_DIR$/run/presentation" />
+            <option value="$PROJECT_DIR$/wear" />
+            <option value="$PROJECT_DIR$/wear/app" />
+            <option value="$PROJECT_DIR$/wear/run" />
+            <option value="$PROJECT_DIR$/wear/run/data" />
+            <option value="$PROJECT_DIR$/wear/run/domain" />
+            <option value="$PROJECT_DIR$/wear/run/presentation" />
           </set>
         </option>
         <option name="resolveExternalAnnotations" value="false" />
