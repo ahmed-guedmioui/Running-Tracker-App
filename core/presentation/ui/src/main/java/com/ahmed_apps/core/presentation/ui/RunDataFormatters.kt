@@ -51,22 +51,10 @@ private fun Double.roundToDecimals(decimalCount: Int): Double {
     return round(this * factor) / factor
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+fun Int?.toFormattedHeartRate(): String {
+    return if(this != null) {
+        "$this bpm"
+    } else {
+        "-"
+    }
+}

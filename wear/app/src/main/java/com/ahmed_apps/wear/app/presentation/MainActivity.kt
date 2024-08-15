@@ -11,6 +11,7 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.wear.compose.material3.Button
 import androidx.wear.compose.material3.Text
 import com.ahmed_apps.core.presentation.designsystem_wear.RunningTrackerTheme
+import com.ahmed_apps.wear.run.presentation.TrackerScreenCore
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,14 +21,7 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             RunningTrackerTheme {
-                Box(
-                    modifier = Modifier.fillMaxSize(),
-                    contentAlignment = Alignment.Center
-                ) {
-                   Button(onClick = {  }) {
-                       Text(text = "Hello")
-                   }
-                }
+                TrackerScreenCore()
             }
         }
     }
