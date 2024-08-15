@@ -192,7 +192,7 @@ class HealthServicesExerciseTracker(
     private fun hasBodySensorsPermission(): Boolean {
         return ContextCompat.checkSelfPermission(
             context, Manifest.permission.BODY_SENSORS
-        ) == PackageManager.PERMISSION_DENIED
+        ) == PackageManager.PERMISSION_GRANTED
     }
 
     private suspend fun getActiveExerciseInfo(): EmptyResult<ExerciseError> {

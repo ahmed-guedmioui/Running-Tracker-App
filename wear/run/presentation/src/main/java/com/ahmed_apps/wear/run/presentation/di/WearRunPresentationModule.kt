@@ -9,5 +9,5 @@ import org.koin.dsl.module
  */
 
 val wearRunPresentationModule = module {
-    viewModel { TrackerViewModel() }
+    viewModel { TrackerViewModel(get()) }
 }
