@@ -8,6 +8,6 @@ import org.koin.dsl.module
  * @author Ahmed Guedmioui
  */
 
-val runPresentationModule = module {
+val wearRunPresentationModule = module {
     viewModel { TrackerViewModel() }
 }

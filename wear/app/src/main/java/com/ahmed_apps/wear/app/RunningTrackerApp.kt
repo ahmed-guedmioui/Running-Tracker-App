@@ -1,19 +1,23 @@
 package com.ahmed_apps.wear.app
 
 import android.app.Application
-import com.ahmed_apps.wear.run.presentation.di.runPresentationModule
+import com.ahmed_apps.wear.run.data.di.wearRunDataModule
+import com.ahmed_apps.wear.run.presentation.di.wearRunPresentationModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
 /**
  * @author Ahmed Guedmioui
  */
-class RunningTrackerApp: Application() {
+class RunningTrackerApp : Application() {
     override fun onCreate() {
         super.onCreate()
         startKoin {
             androidContext(this@RunningTrackerApp)
-            modules(runPresentationModule)
+            modules(
+                wearRunPresentationModule,
+                wearRunDataModule
+            )
         }
     }
 }
