@@ -31,6 +31,7 @@ import com.ahmed_apps.core.presentation.designsystem.components.RunningTrackerTo
 import com.ahmed_apps.core.presentation.designsystem.components.util.DropDownMenuItem
 import com.ahmed_apps.run.presentation.R
 import com.ahmed_apps.run.presentation.run_overview.component.RunListItem
+import com.ahmed_apps.run.presentation.run_overview.model.RunUi
 import org.koin.androidx.compose.koinViewModel
 
 /**
@@ -144,7 +145,32 @@ private fun RunOverviewScreen(
 private fun RunOverviewScreenPreview() {
     RunningTrackerTheme {
         RunOverviewScreen(
-            state = RunOverviewState(),
+            state = RunOverviewState(
+                runs = listOf(
+                    RunUi(
+                        id = "String",
+                        duration = "String",
+                        dateTime = "String",
+                        distance = "String",
+                        maxSpeed = "String",
+                        totalElevation = "String",
+                        avgSpeed = "String",
+                        pace = "String",
+                        mapPictureUrl = "String"
+                    ),
+                    RunUi(
+                        id = "String 1",
+                        duration = "String",
+                        dateTime = "String",
+                        distance = "String",
+                        maxSpeed = "String",
+                        totalElevation = "String",
+                        avgSpeed = "String",
+                        pace = "String",
+                        mapPictureUrl = "String"
+                    )
+                )
+            ),
             onAction = {}
         )
     }

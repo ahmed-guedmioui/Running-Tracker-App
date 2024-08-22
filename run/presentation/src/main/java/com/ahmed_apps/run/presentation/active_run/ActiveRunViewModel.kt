@@ -13,16 +13,19 @@ import com.ahmed_apps.core.domian.util.Result
 import com.ahmed_apps.core.presentation.ui.asUiText
 import com.ahmed_apps.run.domain.LocationDataCalculator
 import com.ahmed_apps.run.domain.RunningTracker
+import com.ahmed_apps.run.domain.WatchConnector
 import com.ahmed_apps.run.presentation.active_run.service.ActiveRunService
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import java.time.ZoneId
 import java.time.ZonedDateTime
 
@@ -31,7 +34,8 @@ import java.time.ZonedDateTime
  */
 class ActiveRunViewModel(
     private val runningTracker: RunningTracker,
-    private val runRepository: RunRepository
+    private val runRepository: RunRepository,
+    watchConnector: WatchConnector
 ) : ViewModel() {
 
     var state by mutableStateOf(
@@ -58,6 +62,14 @@ class ActiveRunViewModel(
     }.stateIn(viewModelScope, SharingStarted.Lazily, false)
 
     init {
+        watchConnector
+            .connectedDevices
+            .filterNotNull()
+            .onEach {
+                Timber.d("Connected device: ${it.displayName}")
+            }
+            .launchIn(viewModelScope)
+
         hasLocationPermission
             .onEach { hasPermission ->
                 if (hasPermission) {

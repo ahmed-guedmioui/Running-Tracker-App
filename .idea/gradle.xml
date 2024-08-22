@@ -34,6 +34,9 @@
             <option value="$PROJECT_DIR$/build-logic" />
             <option value="$PROJECT_DIR$/build-logic/convention" />
             <option value="$PROJECT_DIR$/core" />
+            <option value="$PROJECT_DIR$/core/connectivity" />
+            <option value="$PROJECT_DIR$/core/connectivity/data" />
+            <option value="$PROJECT_DIR$/core/connectivity/domain" />
             <option value="$PROJECT_DIR$/core/data" />
             <option value="$PROJECT_DIR$/core/database" />
             <option value="$PROJECT_DIR$/core/domain" />
