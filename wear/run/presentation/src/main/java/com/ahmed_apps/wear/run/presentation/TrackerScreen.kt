@@ -3,6 +3,7 @@ package com.ahmed_apps.wear.run.presentation
 import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Build
+import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.background
@@ -39,6 +40,7 @@ import com.ahmed_apps.core.presentation.designsystem.FinishIcon
 import com.ahmed_apps.core.presentation.designsystem.PauseIcon
 import com.ahmed_apps.core.presentation.designsystem.StartIcon
 import com.ahmed_apps.core.presentation.designsystem_wear.RunningTrackerTheme
+import com.ahmed_apps.core.presentation.ui.ObserveAsEvent
 import com.ahmed_apps.core.presentation.ui.formatted
 import com.ahmed_apps.core.presentation.ui.toFormattedHeartRate
 import com.ahmed_apps.core.presentation.ui.toFormattedKmh
@@ -54,6 +56,22 @@ import org.koin.androidx.compose.koinViewModel
 fun TrackerScreenCore(
     viewModel: TrackerViewModel = koinViewModel()
 ) {
+
+    val context = LocalContext.current
+
+    ObserveAsEvent(flow = viewModel.events) { event ->
+        when (event) {
+            is TrackerEvent.Error -> {
+                Toast.makeText(
+                    context,
+                    event.message.asString(context),
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+            TrackerEvent.RunFinished -> Unit
+        }
+    }
+
     TrackerScreen(
         state = viewModel.state,
         onAction = viewModel::onAction
