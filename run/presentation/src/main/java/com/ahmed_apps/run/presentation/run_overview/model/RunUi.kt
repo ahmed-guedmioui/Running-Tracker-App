@@ -12,5 +12,7 @@ data class RunUi(
     val totalElevation: String,
     val avgSpeed: String,
     val pace: String,
-    val mapPictureUrl: String?
+    val mapPictureUrl: String?,
+    val avgHeartRate: String,
+    val maxHeartRate: String
 )

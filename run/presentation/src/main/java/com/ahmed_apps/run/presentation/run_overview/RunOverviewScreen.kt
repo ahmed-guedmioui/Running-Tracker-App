@@ -156,7 +156,9 @@ private fun RunOverviewScreenPreview() {
                         totalElevation = "String",
                         avgSpeed = "String",
                         pace = "String",
-                        mapPictureUrl = "String"
+                        mapPictureUrl = "String",
+                        avgHeartRate = 120.toString(),
+                        maxHeartRate = 150.toString()
                     ),
                     RunUi(
                         id = "String 1",
@@ -167,7 +169,9 @@ private fun RunOverviewScreenPreview() {
                         totalElevation = "String",
                         avgSpeed = "String",
                         pace = "String",
-                        mapPictureUrl = "String"
+                        mapPictureUrl = "String",
+                        avgHeartRate = 120.toString(),
+                        maxHeartRate = 150.toString()
                     )
                 )
             ),

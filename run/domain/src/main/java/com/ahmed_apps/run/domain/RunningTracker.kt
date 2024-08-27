@@ -1,5 +1,6 @@
 package com.ahmed_apps.run.domain
 
+import com.ahmed_apps.core.connectivity.domain.messaging.MessagingAction
 import com.ahmed_apps.core.domian.Timer
 import com.ahmed_apps.core.domian.location.LocationTimestamp
 import kotlinx.coroutines.CoroutineScope
@@ -8,12 +9,17 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.combineTransform
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.filterIsInstance
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.runningFold
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.flow.zip
@@ -27,7 +33,8 @@ import kotlin.time.Duration.Companion.seconds
 @OptIn(ExperimentalCoroutinesApi::class)
 class RunningTracker(
     private val locationObserver: LocationObserver,
-    applicationScope: CoroutineScope
+    private val applicationScope: CoroutineScope,
+    private val watchConnector: WatchConnector
 ) {
 
     private val _runData = MutableStateFlow(RunData())
@@ -39,7 +46,6 @@ class RunningTracker(
 
     private val _elapsedTime = MutableStateFlow(Duration.ZERO)
     val elapsedTime = _elapsedTime.asStateFlow()
-
 
     @OptIn(ExperimentalCoroutinesApi::class)
     val currentLocation = isObservingLocation
@@ -54,6 +60,25 @@ class RunningTracker(
             applicationScope,
             SharingStarted.Lazily,
             null
+        )
+
+    private val heartRates = isTracking
+        .flatMapLatest { isTracking ->
+            if (isTracking) {
+                watchConnector.messagingActions
+            } else {
+                flowOf()
+            }
+        }
+        .filterIsInstance<MessagingAction.HeartRateUpdate>()
+        .map { it.heartRate }
+        .runningFold(initial = emptyList<Int>()) { currentHeartRates, newHeartRate ->
+            currentHeartRates + newHeartRate
+        }
+        .stateIn(
+            applicationScope,
+            SharingStarted.Lazily,
+            emptyList()
         )
 
     init {
@@ -94,7 +119,7 @@ class RunningTracker(
                     durationTimestamp = elapsedTime
                 )
             }
-            .onEach { location ->
+            .combine(heartRates) { location, heartRates ->
                 val currentLocations = runData.value.locations
                 val lastLocationsList = if (currentLocations.isNotEmpty()) {
                     currentLocations.last() + location
@@ -119,9 +144,24 @@ class RunningTracker(
                     RunData(
                         distanceMeters = distanceMeters,
                         pace = avgSecondsPerKm.seconds,
-                        locations = newLocationsList
+                        locations = newLocationsList,
+                        heartRates = heartRates
                     )
                 }
+            }
+            .launchIn(applicationScope)
+
+        elapsedTime
+            .onEach {
+                watchConnector.sendActionToWatch(MessagingAction.TimeUpdate(it))
+            }
+            .launchIn(applicationScope)
+
+        runData
+            .map { it.distanceMeters }
+            .distinctUntilChanged()
+            .onEach {
+                watchConnector.sendActionToWatch(MessagingAction.DistanceUpdate(it))
             }
             .launchIn(applicationScope)
     }
@@ -132,10 +172,12 @@ class RunningTracker(
 
     fun startObservingLocation() {
         isObservingLocation.value = true
+        watchConnector.setIsTrackable(true)
     }
 
     fun stopObservingLocation() {
         isObservingLocation.value = false
+        watchConnector.setIsTrackable(false)
     }
 
     fun finishRun() {

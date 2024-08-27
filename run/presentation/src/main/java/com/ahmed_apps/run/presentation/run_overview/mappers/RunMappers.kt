@@ -2,6 +2,7 @@ package com.ahmed_apps.run.presentation.run_overview.mappers
 
 import com.ahmed_apps.core.domian.run.Run
 import com.ahmed_apps.core.presentation.ui.formatted
+import com.ahmed_apps.core.presentation.ui.toFormattedHeartRate
 import com.ahmed_apps.core.presentation.ui.toFormattedKm
 import com.ahmed_apps.core.presentation.ui.toFormattedKmh
 import com.ahmed_apps.core.presentation.ui.toFormattedMeters
@@ -32,7 +33,9 @@ fun Run.toRunUi(): RunUi {
         maxSpeed = maxSpeedKmh.toFormattedKmh(),
         pace = duration.toFormattedPace(distanceKm),
         totalElevation = totalElevationMeters.toFormattedMeters(),
-        mapPictureUrl = mapPictureUrl
+        mapPictureUrl = mapPictureUrl,
+        avgHeartRate = avgHeartRate.toFormattedHeartRate(),
+        maxHeartRate = maxHeartRate.toFormattedHeartRate()
     )
 }
 

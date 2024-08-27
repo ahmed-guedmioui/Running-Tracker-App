@@ -18,7 +18,9 @@ fun RunDto.toRun(): Run {
         location = Location(lat, long),
         maxSpeedKmh = maxSpeedKmh,
         totalElevationMeters = totalElevationMeters,
-        mapPictureUrl = mapPictureUrl
+        mapPictureUrl = mapPictureUrl,
+        avgHeartRate = avgHeartRate,
+        maxHeartRate = maxHeartRate
     )
 }
 
@@ -32,7 +34,9 @@ fun Run.toCreateRunRequest(): CreateRunRequest {
         avgSpeedKmh = avgSpeedKmh,
         maxSpeedKmh = maxSpeedKmh,
         totalElevationMeters = totalElevationMeters,
-        epochMillis = dateTimeUtc.toEpochSecond() * 1000
+        epochMillis = dateTimeUtc.toEpochSecond() * 1000,
+        avgHeartRate = avgHeartRate,
+        maxHeartRate = maxHeartRate
     )
 }
 

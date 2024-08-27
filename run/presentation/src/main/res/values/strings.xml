@@ -25,5 +25,8 @@
     <string name="max_speed">Max Speed</string>
     <string name="total_elevation">Total Elevetion</string>
     <string name="delete">Delete</string>
+    <string name="heart_rate">Heart Rate</string>
+    <string name="max_heart_rate">Max Heart Rate</string>
+    <string name="avg_heart_rate">Avg Heart Rate</string>
 
 </resources>
