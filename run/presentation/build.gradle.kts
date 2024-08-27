@@ -14,6 +14,7 @@ dependencies {
     implementation(libs.timber)
 
     implementation(projects.core.domain)
-    implementation(projects.core.connectivity.domain)
     implementation(projects.run.domain)
+    implementation(projects.core.connectivity.domain)
+    implementation(projects.core.notification)
 }

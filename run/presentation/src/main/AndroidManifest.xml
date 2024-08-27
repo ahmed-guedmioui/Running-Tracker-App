@@ -13,7 +13,7 @@
             android:value="${MAPS_API_KEY}" />
 
         <service
-            android:name=".active_run.service.ActiveRunService"
+            android:name="com.ahmed_apps.core.notification.ActiveRunService"
             android:foregroundServiceType="location" />
     </application>
 

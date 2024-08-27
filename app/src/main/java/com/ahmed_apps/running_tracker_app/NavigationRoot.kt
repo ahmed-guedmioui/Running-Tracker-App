@@ -1,6 +1,5 @@
 package com.ahmed_apps.running_tracker_app
 
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavGraphBuilder
@@ -12,8 +11,8 @@ import androidx.navigation.navDeepLink
 import com.ahmed_apps.auth.presentation.intro.IntroScreenCore
 import com.ahmed_apps.auth.presentation.login.LoginScreenCore
 import com.ahmed_apps.auth.presentation.register.RegisterScreenCore
+import com.ahmed_apps.core.notification.ActiveRunService
 import com.ahmed_apps.run.presentation.active_run.ActiveRunScreenCore
-import com.ahmed_apps.run.presentation.active_run.service.ActiveRunService
 import com.ahmed_apps.run.presentation.run_overview.RunOverviewScreenCore
 
 /**

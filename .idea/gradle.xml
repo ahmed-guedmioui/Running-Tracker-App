@@ -40,6 +40,7 @@
             <option value="$PROJECT_DIR$/core/data" />
             <option value="$PROJECT_DIR$/core/database" />
             <option value="$PROJECT_DIR$/core/domain" />
+            <option value="$PROJECT_DIR$/core/notification" />
             <option value="$PROJECT_DIR$/core/presentation" />
             <option value="$PROJECT_DIR$/core/presentation/designsystem" />
             <option value="$PROJECT_DIR$/core/presentation/designsystem_wear" />
