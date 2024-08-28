@@ -12,32 +12,40 @@ import com.ahmed_apps.core.notification.ActiveRunService
 import com.ahmed_apps.wear.run.domain.ExerciseTracker
 import com.ahmed_apps.wear.run.domain.PhoneConnector
 import com.ahmed_apps.wear.run.domain.RunningTracker
+import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.filterNotNull
+import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.receiveAsFlow
+import kotlinx.coroutines.flow.sample
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import kotlin.time.Duration
+import kotlin.time.Duration.Companion.seconds
 
 /**
  * @author Ahmed Guedmioui
  */
+@Suppress("OPT_IN_USAGE")
+@OptIn(FlowPreview::class)
 class TrackerViewModel(
     private val exerciseTracker: ExerciseTracker,
     private val phoneConnector: PhoneConnector,
     private val runningTracker: RunningTracker
 ) : ViewModel() {
 
-    var state by mutableStateOf(TrackerState(
-        hasStartedRunning = ActiveRunService.isServiceActive.value,
-        isRunActive = ActiveRunService.isServiceActive.value && runningTracker.isTracking.value,
-        isTrackable = ActiveRunService.isServiceActive.value
-    ))
+    var state by mutableStateOf(
+        TrackerState(
+            hasStartedRunning = ActiveRunService.isServiceActive.value,
+            isRunActive = ActiveRunService.isServiceActive.value && runningTracker.isTracking.value,
+            isTrackable = ActiveRunService.isServiceActive.value
+        )
+    )
         private set
 
     private var hasBodySensorsPermission = MutableStateFlow(false)
@@ -108,24 +116,42 @@ class TrackerViewModel(
             state = state.copy(canTrackHeartRate = isHeartRateTrackingSupported)
         }
 
-        runningTracker
-            .heartRate
+        val isAmbientMode = snapshotFlow { state.isAmbientMode }
+
+        isAmbientMode
+            .flatMapLatest { isAmbientMode ->
+                if (isAmbientMode) {
+                    runningTracker
+                        .heartRate
+                        .sample(10.seconds)
+                } else {
+                    runningTracker.heartRate
+                }
+            }
             .onEach {
                 state = state.copy(heartRate = it)
             }
             .launchIn(viewModelScope)
 
-        runningTracker
-            .elapsedTime
+        isAmbientMode
+            .flatMapLatest { isAmbientMode ->
+                if (isAmbientMode) {
+                    runningTracker
+                        .elapsedTime
+                        .sample(10.seconds)
+                } else {
+                    runningTracker.elapsedTime
+                }
+            }
             .onEach {
                 state = state.copy(elapsedDuration = it)
             }
             .launchIn(viewModelScope)
 
         runningTracker
-            .heartRate
+            .distanceMeters
             .onEach {
-                state = state.copy(heartRate = it)
+                state = state.copy(distanceMeters = it)
             }
             .launchIn(viewModelScope)
 
@@ -175,6 +201,18 @@ class TrackerViewModel(
                 }
             }
 
+            is TrackerAction.OnEnterAmbientMode -> {
+                state = state.copy(
+                    isAmbientMode = true,
+                    burnInProtectionRequired = action.burnInProtectionRequired
+                )
+            }
+
+            TrackerAction.OnExitAmbientMode -> {
+                state = state.copy(
+                    isAmbientMode = false
+                )
+            }
         }
     }
 

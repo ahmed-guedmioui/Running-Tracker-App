@@ -13,5 +13,7 @@ data class TrackerState(
     val hasStartedRunning: Boolean = false,
     val isConnectedPhoneNearby: Boolean = false,
     val isRunActive: Boolean = false,
-    val canTrackHeartRate: Boolean = false
+    val canTrackHeartRate: Boolean = false,
+    val isAmbientMode: Boolean = false,
+    val burnInProtectionRequired: Boolean = false
 )
