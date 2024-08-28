@@ -32,8 +32,8 @@ import kotlin.time.Duration.Companion.seconds
 @OptIn(ExperimentalCoroutinesApi::class)
 class RunningTracker(
     private val locationObserver: LocationObserver,
-    private val applicationScope: CoroutineScope,
-    private val watchConnector: WatchConnector
+    private val watchConnector: WatchConnector,
+    applicationScope: CoroutineScope
 ) {
 
     private val _runData = MutableStateFlow(RunData())
@@ -125,7 +125,7 @@ class RunningTracker(
                 } else {
                     listOf(location)
                 }
-                val newLocationsList = currentLocations.replaceLast(lastLocationsList)
+                val newLocationsList = currentLocations.replaceLast(lastLocationsList.distinct())
 
                 val distanceMeters = LocationDataCalculator.getTotalDistanceMeters(
                     locations = newLocationsList

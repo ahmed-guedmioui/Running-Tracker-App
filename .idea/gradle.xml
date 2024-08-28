@@ -45,6 +45,7 @@
             <option value="$PROJECT_DIR$/core/presentation/designsystem" />
             <option value="$PROJECT_DIR$/core/presentation/designsystem_wear" />
             <option value="$PROJECT_DIR$/core/presentation/ui" />
+            <option value="$PROJECT_DIR$/core/test" />
             <option value="$PROJECT_DIR$/run" />
             <option value="$PROJECT_DIR$/run/data" />
             <option value="$PROJECT_DIR$/run/domain" />
