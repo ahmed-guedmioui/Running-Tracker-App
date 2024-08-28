@@ -6,6 +6,6 @@ import kotlin.time.Duration
  * @author Ahmed Guedmioui
  */
 data class LocationTimestamp(
-    val location: LocationWithAltitude,
+    val locationWithAltitude: LocationWithAltitude,
     val durationTimestamp: Duration,
 )

@@ -3,7 +3,6 @@ package com.ahmed_apps.run.presentation.active_run.maps
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.colorResource
 import com.ahmed_apps.core.domian.location.LocationTimestamp
 import com.google.android.gms.maps.model.JointType
 import com.google.android.gms.maps.model.LatLng
@@ -22,8 +21,8 @@ fun RunningTrackerPolylines(
         locations.map {
             it.zipWithNext { timestamp1, timestamp2 ->
                 PolylineUI(
-                    location1 = timestamp1.location.location,
-                    location2 = timestamp2.location.location,
+                    location1 = timestamp1.locationWithAltitude.location,
+                    location2 = timestamp2.locationWithAltitude.location,
                     color = PolylineColorCalculator.locationsToColor(timestamp1, timestamp2)
                 )
             }

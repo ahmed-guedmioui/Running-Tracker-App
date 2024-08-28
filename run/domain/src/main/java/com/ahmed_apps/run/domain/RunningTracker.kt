@@ -4,7 +4,6 @@ import com.ahmed_apps.core.connectivity.domain.messaging.MessagingAction
 import com.ahmed_apps.core.domian.Timer
 import com.ahmed_apps.core.domian.location.LocationTimestamp
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -115,7 +114,7 @@ class RunningTracker(
             }
             .zip(_elapsedTime) { location, elapsedTime ->
                 LocationTimestamp(
-                    location = location,
+                    locationWithAltitude = location,
                     durationTimestamp = elapsedTime
                 )
             }

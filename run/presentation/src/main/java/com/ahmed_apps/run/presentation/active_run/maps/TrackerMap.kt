@@ -27,7 +27,6 @@ import androidx.compose.ui.unit.dp
 import com.ahmed_apps.core.domian.location.Location
 import com.ahmed_apps.core.domian.location.LocationTimestamp
 import com.ahmed_apps.core.presentation.designsystem.RunIcon
-import com.ahmed_apps.run.presentation.BuildConfig
 import com.ahmed_apps.run.presentation.R
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.model.LatLng
@@ -133,8 +132,8 @@ fun TrackerMap(
                 locations.flatten().forEach { location ->
                     bounceBuilder.include(
                         LatLng(
-                            location.location.location.lat,
-                            location.location.location.long,
+                            location.locationWithAltitude.location.lat,
+                            location.locationWithAltitude.location.long,
                         )
                     )
                 }
