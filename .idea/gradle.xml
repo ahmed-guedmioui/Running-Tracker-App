@@ -34,6 +34,7 @@
             <option value="$PROJECT_DIR$/build-logic" />
             <option value="$PROJECT_DIR$/build-logic/convention" />
             <option value="$PROJECT_DIR$/core" />
+            <option value="$PROJECT_DIR$/core/android-test" />
             <option value="$PROJECT_DIR$/core/connectivity" />
             <option value="$PROJECT_DIR$/core/connectivity/data" />
             <option value="$PROJECT_DIR$/core/connectivity/domain" />
