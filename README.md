@@ -10,23 +10,23 @@ With this app, you can effortlessly track your runs and monitor key statistics s
 
 ## Features
 
-- **Project Planning & Architecture**
+- **Project Planning & Architecture:**
 Thoughtful planning and architectural design for scalable and maintainable app development.
 Incorporates the fundamentals of software architecture, ensuring a solid foundation.
-- **Gradle & Multi-Module Architecture**
+- **Gradle & Multi-Module Architecture:**
 Utilizes advanced Gradle configurations, including convention plugins and version catalogs.
 Implements a multi-module architecture to improve build times and code separation.
-- **Jetpack Compose UI**
+- **Jetpack Compose UI:**
 Modern UI implementation using Jetpack Compose, tailored for industry-scale projects.
-- **Authentication**
+- **Authentication:**
 Secure and reliable OAuth authentication system integrated for user management.
-- **Offline-First Development**
+- **Offline-First Development:**
 Robust offline capabilities using Room for local storage and Ktor for network operations.
-- **Dynamic Feature Modules**
+- **Dynamic Feature Modules:**
 Modular design with dynamic feature modules, allowing on-demand feature loading.
-- **Google Maps Integration**
+- **Google Maps Integration:**
 Real-time route mapping using the Google Maps SDK.
-- **Wear OS Support**
+- **Wear OS Support:**
 Comprehensive Wear OS support, including theming, exercise tracking, and health data management.
 Features like discovering paired devices and syncing data between the watch and phone.
 Implementation of always-on mode with ambient display.
